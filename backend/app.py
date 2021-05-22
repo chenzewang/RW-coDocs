@@ -530,7 +530,8 @@ def create_personal_doc():
         # db.session.add(newDocumentUser)
         # db.session.commit()
     response={
-        'message':msg
+        'message':msg,
+        'newDocumentId':id
     }
     return jsonify(response)
 
