@@ -51,6 +51,7 @@ class Client {
    * @param {*} conection 
    * @param {*} request 
    * @returns 
+   * @deprecated
    */
   addDoc(conection, request) {
     const params = this.getParams(request)
