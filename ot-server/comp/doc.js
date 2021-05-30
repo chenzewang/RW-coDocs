@@ -25,11 +25,7 @@ class Doc {
     const doc = connection.get('multiDoc', this.id)
     doc.fetch(function (err) {
       if (err) throw err
-
-
-      //TODO 从mysql获取文档内容
       if (doc.type === null) {
-
         docApi.getDocumentContent(documentId).then(res => {
           // console.log(res);
           doc.create({
@@ -37,13 +33,7 @@ class Doc {
           }, callback)
           return
         })
-
-
-
       }
-      //endTODO
-
-
       callback()
     })
     return doc
@@ -94,6 +84,11 @@ class Doc {
       if (data.action === "broadcast") {
         this.sockets.forEach(socket => {
           socket.sendMessage("broadcast", data.data)
+        })
+      }
+      if (data.action === "vCaretInsert") {
+        this.sockets.forEach(socket => {
+          socket.sendMessage("vCaretInsert", data.data)
         })
       }
     })
