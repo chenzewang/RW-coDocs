@@ -272,10 +272,12 @@ export default {
             _this.wronglog.wl = false;
             _this.rightlog.rl = true;
             localStorage.setItem("token", _this.loginForm.username);
+            localStorage.setItem("access_token", response.data.token);
             localStorage.setItem("userid", response.data.id);
-            console.log("用户登录" + localStorage.getItem("userid"));
             _this.$router.push("/");
-            _this.$router.go(0);
+            setTimeout(() => {
+              _this.$router.go(0);
+            }, 0);
           } else {
             _this.wronglog.wl = true;
             _this.rightlog.rl = false;

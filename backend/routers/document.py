@@ -236,6 +236,7 @@ def tell_current_doc_right():
 # 获取文档
 @documentRouter.route('/api/get_doccontent/', methods=['POST'])
 def get_doccontent():
+    print(session)
     msg=''
     mcontent=''
     mtime=datetime.datetime.now()

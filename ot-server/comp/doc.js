@@ -21,15 +21,13 @@ class Doc {
    */
   create(connection, documentId, callback) {
     callback = callback || function () {}
-    // console.log(this.id)
     const doc = connection.get('multiDoc', this.id)
     doc.fetch(function (err) {
       if (err) throw err
       if (doc.type === null) {
         docApi.getDocumentContent(documentId).then(res => {
-          // console.log(res);
           doc.create({
-            content: res[0].content
+            content: res[0].content || ""
           }, callback)
           return
         })

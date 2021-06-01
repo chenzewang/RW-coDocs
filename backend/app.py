@@ -19,6 +19,14 @@ from routers.notice import noticeRouter
 from routers.message import messageRouter
 #end router
 
+#jwt
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import JWTManager
+#end jwt
+
+
 
 app = Flask(__name__,
             static_folder = "../frontend/dist/static",
@@ -28,6 +36,7 @@ app.config.from_object(config)
 app.secret_key = '\xc9ixnRb\xe40\xd4\xa5\x7f\x03\xd0y6\x01\x1f\x96\xeao+\x8a\x9f\xe4'
 db = SQLAlchemy(app)
 
+
 app.register_blueprint(userRouter)
 app.register_blueprint(groupRouter)
 app.register_blueprint(documentRouter)
@@ -35,6 +44,8 @@ app.register_blueprint(rightRouter)
 app.register_blueprint(commentRouter)
 app.register_blueprint(noticeRouter)
 app.register_blueprint(messageRouter)
+
+jwt = JWTManager(app)
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):

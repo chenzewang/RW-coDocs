@@ -60,7 +60,7 @@ def get_user_indocument(documentid):
         all_user+=user
     return all_user
 
-def user_to_content(user):
+def user_to_content(user,token=''):
     content = {
         'id': user.id,
         'username': user.username,
@@ -68,6 +68,8 @@ def user_to_content(user):
         'password': user.password,
         'description': user.description
     }
+    if token:
+        content['token']=token
     return content
 
 

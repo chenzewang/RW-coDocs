@@ -6,6 +6,7 @@ from manage import *
 from sqlalchemy import and_, or_,not_,func
 import datetime,time
 import config
+from flask_jwt_extended import create_access_token,jwt_required
 
 app = Flask(__name__)
 app.config.from_object(config)
@@ -20,10 +21,14 @@ userRouter = Blueprint('user',__name__)
 # tested
 @userRouter.route('/api/login/', methods=['POST'])
 def login():
+    username = request.form['username']
+    password = request.form['password']
     if request.method == 'POST':
-        if valid_login(request.form['username'], request.form['password']):
-            user = get_user_byusername(request.form['username'])
-            response=user_to_content(user)
+        if valid_login(username, password):
+            user = get_user_byusername(username)
+            session = request.form['username']
+            access_token = create_access_token(identity=username)
+            response=user_to_content(user,access_token)
             return jsonify(response)
     return sendmsg('fail')
 
@@ -35,8 +40,9 @@ def get_user():
     response=user_to_content(user)
     return jsonify(response)
 
-# tested
+
 @userRouter.route('/api/get_user_byid/',methods=['POST'])
+# @jwt_required()
 def get_user_byid():
     user=User.query.filter(User.id==request.form['userid']).first()
     return jsonify(user_to_content(user))

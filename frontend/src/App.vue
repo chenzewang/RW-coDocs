@@ -220,6 +220,7 @@ export default {
     },
     logout() {
       localStorage.removeItem("token");
+      localStorage.removeItem("access_token");
       this.$router.push("/loginView");
       this.$router.go(0);
     },

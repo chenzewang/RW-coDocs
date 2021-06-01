@@ -3,39 +3,103 @@ import App from "./App.vue";
 import router from "./router";
 import "./assets/icon/iconfont.css";
 import "ant-design-vue/dist/antd.css";
-import { Button, notification } from "ant-design-vue";
-import { Card } from "ant-design-vue";
-import { Col } from "ant-design-vue";
-import { Row } from "ant-design-vue";
-import { Icon } from "ant-design-vue";
-import { Layout } from "ant-design-vue";
-import { Input } from "ant-design-vue";
-import { Tabs } from "ant-design-vue";
-import { Form } from "ant-design-vue";
-import { FormModel } from "ant-design-vue";
-import { Menu } from "ant-design-vue";
-import { Breadcrumb } from "ant-design-vue";
-import { Dropdown } from "ant-design-vue";
-import { Badge } from "ant-design-vue";
-import { Avatar } from "ant-design-vue";
-import { ConfigProvider } from "ant-design-vue";
-import { List } from "ant-design-vue";
-import { Empty } from "ant-design-vue";
-import { Popover } from "ant-design-vue";
-import { Alert } from "ant-design-vue";
-import { Descriptions, Divider } from "ant-design-vue";
-import { Modal } from "ant-design-vue";
-import { Affix } from "ant-design-vue";
-import { Checkbox } from "ant-design-vue";
-import { Comment } from "ant-design-vue";
-import { Tooltip } from "ant-design-vue";
-import { Radio } from "ant-design-vue";
-import { Table } from "ant-design-vue";
-import { Tag } from "ant-design-vue";
-import { Switch } from "ant-design-vue";
+import {
+  Button,
+  notification
+} from "ant-design-vue";
+import {
+  Card
+} from "ant-design-vue";
+import {
+  Col
+} from "ant-design-vue";
+import {
+  Row
+} from "ant-design-vue";
+import {
+  Icon
+} from "ant-design-vue";
+import {
+  Layout
+} from "ant-design-vue";
+import {
+  Input
+} from "ant-design-vue";
+import {
+  Tabs
+} from "ant-design-vue";
+import {
+  Form
+} from "ant-design-vue";
+import {
+  FormModel
+} from "ant-design-vue";
+import {
+  Menu
+} from "ant-design-vue";
+import {
+  Breadcrumb
+} from "ant-design-vue";
+import {
+  Dropdown
+} from "ant-design-vue";
+import {
+  Badge
+} from "ant-design-vue";
+import {
+  Avatar
+} from "ant-design-vue";
+import {
+  ConfigProvider
+} from "ant-design-vue";
+import {
+  List
+} from "ant-design-vue";
+import {
+  Empty
+} from "ant-design-vue";
+import {
+  Popover
+} from "ant-design-vue";
+import {
+  Alert
+} from "ant-design-vue";
+import {
+  Descriptions,
+  Divider
+} from "ant-design-vue";
+import {
+  Modal
+} from "ant-design-vue";
+import {
+  Affix
+} from "ant-design-vue";
+import {
+  Checkbox
+} from "ant-design-vue";
+import {
+  Comment
+} from "ant-design-vue";
+import {
+  Tooltip
+} from "ant-design-vue";
+import {
+  Radio
+} from "ant-design-vue";
+import {
+  Table
+} from "ant-design-vue";
+import {
+  Tag
+} from "ant-design-vue";
+import {
+  Switch
+} from "ant-design-vue";
 import Axios from "axios";
 import VueRouter from "vue-router";
-import { message } from "ant-design-vue";
+import {
+  message
+} from "ant-design-vue";
 import htmlToPdf from "@/utils/htmlToPdf";
 Vue.use(htmlToPdf);
 Vue.prototype.$confirm = Modal.confirm;
@@ -84,7 +148,7 @@ VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err);
 };
 Vue.directive("title", {
-  inserted: function(el) {
+  inserted: function (el) {
     document.title = el.dataset.title;
   }
 });
@@ -97,6 +161,7 @@ Axios.interceptors.request.use(
       if (localStorage.getItem("token")) {
         //在请求头加入token，名字要和后端接收请求头的token名字一样
         config.headers.token = localStorage.getItem("token");
+        config.headers["Authorization"] = `Bearer ${localStorage.getItem("access_token")}`;
       }
     }
     return config;
